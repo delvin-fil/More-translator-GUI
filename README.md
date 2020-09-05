@@ -56,5 +56,16 @@ pip3.6 install --user requests langdetect translators # для свежей ве
 информация от [Tupoll](https://github.com/tupoll)
 ```shell
 pkg install pygobject3-common
-pkg install py36-requests langdetect translators
+pkg install py36-pip
+ln -s /usr/local/bin/pip-3.6 /usr/local/bin/pip
+pip install --user requests langdetect translators
+```
+
+---
+## Установка
+
+```
+git clone https://github.com/delvin-fil/Google-translator-GUI.git
+cd Google-translator-GUI
+chmod +x translatorgtk.py
 ```
