@@ -48,7 +48,7 @@ pip3.6 install --user requests langdetect translators
 ```
 #### Gentoo:
 ```shell
-sudo USE="cairo" PYTHON_TARGETS="python2_7 python3_6" emerge dev-python/pygobject -av
+sudo USE="cairo" PYTHON_TARGETS="python3_6" emerge dev-python/pygobject -av
 sudo emerge dev-python/requests langdetect translators -aqv
 pip3.6 install --user requests langdetect translators # для свежей версии модуля
 ```
