@@ -79,14 +79,14 @@ chmod +x translatorgtk.py
 ### IceWm
 - Открыть файл $HOME/.icewm/keys
 - Добавить строку<br> 
-	```key "Ctrl+1" /path_to/yatrans-gtk.py```
+	```key "Ctrl+1" /path_to/translatorgtk.py```
 - Перезапусть IceWM<br>
 	```Меню >  Выход... > Перезапуск IceWM```
 
 ### Lumina
 - Меню > Настройки > Настройки рабочего стола > Горячие клавиши > Расширенный редактор
 - Добавить строку<br>
-	```Control 1 :Exec /path_to/yatrans-gtk.py```
+	```Control 1 :Exec /path_to/translatorgtk.py```
 
 ### Gmome 3
 - Меню > параметры системы > клавиатура > комбинации клавиш
@@ -99,7 +99,7 @@ chmod +x translatorgtk.py
 - Добавить строку<br>
 	```LUA
 	-- если следующая строка будет в конце текста, последняя запятая не нужна
-	awful.key({ "Mod1", }, "y", function() awful.spawn("sh -c $HOME/path/to/yatrans-gtk.py")end),
+	awful.key({ "Mod1", }, "y", function() awful.spawn("sh -c $HOME/path/to/translatorgtk.py")end),
 	```
 
 Шрифт Menlo Regular указанный в коде присутствует.
