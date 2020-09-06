@@ -12,7 +12,6 @@ from gi.repository import Gdk
 from gi.repository import Pango
 from langdetect import detect
 import translators as ts
-#from textblob import TextBlob
 
 CURRDIR = os.path.dirname(os.path.abspath(__file__))
 ICON = os.path.join(CURRDIR, 'icon.png')
@@ -24,7 +23,6 @@ def clip():
     clip = clipboard.wait_for_text()
     if not clip.strip() or not clip:
         clip = err
-    #if clip.isalnum():
     else:
         clip = clip
     return clip
@@ -41,8 +39,6 @@ def detec():
 
 def translate():
     output = []
-    #blob = TextBlob(clip())
-    #numb = len((blob.sentences))
     output = ts.google(clip(), to_language=detec(), if_use_cn_host=True)
     return output
 
