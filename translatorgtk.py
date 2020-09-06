@@ -29,17 +29,16 @@ def clip():
 
 indetect = detect(clip())
 
-def detec():
-    dettext = detect(clip())
-    if dettext == 'ru':
-        langout = 'en'
-    else:
-        langout = 'ru'
-    return langout
+def definition():
+	if indetect == 'ru':
+		langout = 'en'
+	else:
+		langout = 'ru'
+	return langout
 
 def translate():
     output = []
-    output = ts.google(clip(), to_language=detec(), if_use_cn_host=True)
+    output = ts.google(clip(), to_language=definition(), if_use_cn_host=True)
     return output
 
 class TextViewWindow(Gtk.Window):
@@ -56,7 +55,7 @@ class TextViewWindow(Gtk.Window):
         self.connect("key-press-event", self._key)
 
     def init_ui(self):
-        self.set_title(f"Translate google {indetect}-{detec()}")
+        self.set_title(f"Translate google {indetect}-{definition()}")
 
     def create_toolbar(self):
         toolbar = Gtk.Toolbar()
