@@ -99,7 +99,10 @@ chmod +x translatorgtk.py
 - Добавить строку<br>
 	```LUA
 	-- если следующая строка будет в конце текста, последняя запятая не нужна
-	awful.key({ "Mod1", }, "y", function() awful.spawn("sh -c $HOME/path/to/translatorgtk.py")end),
+	--Altkey:
+    awful.key({ altkey,  }, "y",   function () awful.spawn("googletrans-gtk") end),
+    Для Gentoo Linux сделан ebuild,где /usr/bin/googletrans-gtk запускает переводчик из
+    дирректории /opt.
 	```
 
 Шрифт Menlo Regular указанный в коде присутствует.
