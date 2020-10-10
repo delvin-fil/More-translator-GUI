@@ -55,10 +55,19 @@ pip3.6 install --user requests langdetect translators # для свежей ве
 #### FreeBSD/DragonFly 
 информация от [Tupoll](https://github.com/tupoll)
 ```shell
-pkg install pygobject3-common
-pkg install py36-pip
-ln -s /usr/local/bin/pip-3.6 /usr/local/bin/pip
-pip install --user requests langdetect translators
+pkg install pygobject3-common 
+pkg install py37-requests
+pkg install py37-langdetect
+pkg install py37-pip
+pkg install py37-lxml
+pkg install gcc9
+cc=gcc pip install --user  translators ##от пользователя
+mkdir -p ~/.local/opt
+cd ~/.local/opt
+git clone https://github.com/delvin-fil/Google-translator-GUI
+##измените заголовок файла  /home/tupoll/.local/opt/Google-translator-GUI/translatorgtk.py на #!/usr/bin/env python3.7
+echo '~/.local/opt/Google-translator-GUI/translatorgtk.py'>~/.local/bin/translatorgtk
+~/.local/bin/translatorgtk ##всё,не забываем права дать на запуск
 ```
 
 ---
@@ -96,11 +105,11 @@ chmod +x translatorgtk.py
 Комбинация клавиш **Alt**+**y** 
 
 - открыть файл $HOME/.config/awesome/rc.lua
-- Добавить строку<br>
 	```LUA
 	-- если следующая строка будет в конце текста, последняя запятая не нужна
 	--Altkey:
     awful.key({ altkey,  }, "y",   function () awful.spawn("googletrans-gtk") end),
+    awful.key({ altkey,  }, "y",   function () awful.spawn(".local/bin/translatorgtk") end),--fixed by freebsd 
     Для Gentoo Linux сделан ebuild,где /usr/bin/googletrans-gtk запускает переводчик из
     дирректории /opt.
 	```
