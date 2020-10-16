@@ -67,7 +67,11 @@ cd ~/.local/opt
 git clone https://github.com/delvin-fil/Google-translator-GUI
 ##измените заголовок файла  /home/tupoll/.local/opt/Google-translator-GUI/translatorgtk.py на #!/usr/bin/env python3.7
 echo '~/.local/opt/Google-translator-GUI/translatorgtk.py'>~/.local/bin/translatorgtk
-~/.local/bin/translatorgtk ##всё,не забываем права дать на запуск
+~/.local/bin/translatorgtk ##всё,не забываем права дать на запуск 
+###Для DragonFlyBSD дополнительно:
+ln -s /lib/libc.so.8 /lib/libc.so.6
+pip install --user pgi
+В файле ~/.local/opt/Google-translator-GUI/translatorgtk.py исправить модуль gi на pgi.
 ```
 
 ---
