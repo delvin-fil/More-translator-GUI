@@ -117,7 +117,7 @@ chmod +x translatorgtk.py
     Для Gentoo Linux сделан ebuild,где /usr/bin/googletrans-gtk запускает переводчик из
     дирректории /opt.
 	```
-### Дополнительно 
+### Дополнительно
 Шрифт Menlo Regular указанный в коде присутствует.
 ```python
  self.textview.modify_font(Pango.FontDescription('Menlo Regular 24'))
