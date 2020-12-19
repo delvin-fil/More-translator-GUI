@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.8
 # -*- coding: utf-8 -*-
-
+'''
+https://github.com/uliontse/translators
+'''
 import warnings
 warnings.filterwarnings("ignore")
 import os
@@ -21,6 +23,7 @@ err = "Buffer empty!"
 def clip():
     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
     clip = clipboard.wait_for_text()
+    print (clip)
     if not clip.strip() or not clip:
         clip = err
     else:
@@ -35,10 +38,11 @@ def definition():
 	else:
 		langout = 'ru'
 	return langout
-
+print (definition())
 def translate():
     output = []
-    output = ts.google(clip(), to_language=definition(), if_use_cn_host=True)
+    output = ts.bing(clip(), to_language=definition(), if_use_cn_host=False)
+    print (output)
     return output
 
 class TextViewWindow(Gtk.Window):
