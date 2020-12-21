@@ -18,7 +18,7 @@ import translators as ts
 CURRDIR = os.path.dirname(os.path.abspath(__file__))
 ICON = os.path.join(CURRDIR, 'icon.png')
 
-err = "Buffer empty!"
+err = "Buffer empty!!!"
 
 def clip():
     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
