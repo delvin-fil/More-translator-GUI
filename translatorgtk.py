@@ -23,10 +23,10 @@ err = "Buffer empty!!!"
 def clip():
     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
     clip = clipboard.wait_for_text()
-    if not clip.strip() or not clip:
-        clip = err
-    else:
+    if clip is not None:
         clip = clip
+    else:
+        clip = err
     return clip
 
 indetect = detect(clip())
