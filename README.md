@@ -124,7 +124,7 @@ chmod +x translatorgtk.py
  self.textview.modify_font(Pango.FontDescription('Menlo Regular 24'))
 ```
 ### Исправление ошибок
-**1.** 22.01.21 Исправлена ошибка
+1. 22.01.21 Исправлена ошибка
 ```python
 AttributeError: 'NoneType' object has no attribute 'strip'
 ```
