@@ -83,7 +83,10 @@ git clone https://github.com/delvin-fil/Google-translator-GUI.git
 cd Google-translator-GUI
 chmod +x translatorgtk.py
 ```
-
+Для тех, у кого проблема с буерм GTK:
+```
+chmod +x translatorxclip.py
+```
 ---
 ## Привязка переводчика к горячей клавише
 

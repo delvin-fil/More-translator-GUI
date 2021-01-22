@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
 '''
 https://github.com/uliontse/translators
@@ -21,28 +21,28 @@ ICON = os.path.join(CURRDIR, 'icon.png')
 err = "Buffer empty!!!"
 
 def clip():
-    clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
-    clip = clipboard.wait_for_text()
-    if not clip.strip() or not clip:
-        clip = err
+    clipbrd = os.popen('xclip -selection clipboard -o').read()
+    if clipbrd is not None:
+        clipbrd = clipbrd
     else:
-        clip = clip
-    return clip
+        clipbrd = err
+    return clipbrd
+print (clip())
 
 indetect = detect(clip())
 
 def definition():
-	if indetect == 'ru':
-		langout = 'en'
-	else:
-		langout = 'ru'
-	return langout
+    if indetect == 'ru':
+        langout = 'en'
+    else:
+        langout = 'ru'
+    return langout
 
 def translate():
     output = []
     output = ts.bing(clip(), to_language=definition(), if_use_cn_host=False)
     return output
-
+#print (translate)
 class TextViewWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self)
