@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
 '''
 https://github.com/uliontse/translators
@@ -40,7 +40,7 @@ def definition():
 
 def translate():
     output = []
-    output = ts.bing(clip(), to_language=definition(), if_use_cn_host=False)
+    output = ts.google(clip(), to_language=definition(), if_use_cn_host=False)
     return output
 
 class TextViewWindow(Gtk.Window):

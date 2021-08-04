@@ -21,7 +21,7 @@ ICON = os.path.join(CURRDIR, 'icon.png')
 err = "Buffer empty!!!"
 
 def clip():
-    clipbrd = os.popen('xclip -selection clipboard -o').read()
+    clipbrd = os.popen('xclip -o -selection primary').read()
     if clipbrd is not None:
         clipbrd = clipbrd
     else:
@@ -40,7 +40,7 @@ def definition():
 
 def translate():
     output = []
-    output = ts.bing(clip(), to_language=definition(), if_use_cn_host=False)
+    output = ts.google(clip(), to_language=definition(), if_use_cn_host=False)
     return output
 #print (translate)
 class TextViewWindow(Gtk.Window):
