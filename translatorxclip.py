@@ -27,7 +27,7 @@ def clip():
     else:
         clipbrd = err
     return clipbrd
-print (clip())
+#print (clip())
 
 indetect = detect(clip())
 
