@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.9
+#!/usr/bin/env python3.10
 # -*- coding: utf-8 -*-
 '''
 https://github.com/uliontse/translators
@@ -9,16 +9,20 @@ import os
 import re
 import gi
 gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Pango
 from langdetect import detect
 import translators as ts
 
+engin = 'bing'
+
 CURRDIR = os.path.dirname(os.path.abspath(__file__))
-ICON = os.path.join(CURRDIR, 'icon.png')
+ICON = os.path.join(CURRDIR, f'{engin}.png')
 
 err = "Buffer empty!!!"
+proxy = {'address': '127.0.0.1', 'port': 9050}
 
 def clip():
     clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
@@ -40,7 +44,12 @@ def definition():
 
 def translate():
     output = []
-    output = ts.google(clip(), to_language=definition(), if_use_cn_host=False)
+    #output = ts.google(clip(), to_language=definition(), if_use_cn_host=False, proxies=proxy)
+    if engin == 'bing' :
+        output = ts.bing(clip(), to_language=definition(), professional_field='general')
+    else:
+        output = ts.google(clip(), to_language=definition(), professional_field='general')
+    #output = ts.tencent(clip())
     return output
 
 class TextViewWindow(Gtk.Window):
@@ -57,7 +66,7 @@ class TextViewWindow(Gtk.Window):
         self.connect("key-press-event", self._key)
 
     def init_ui(self):
-        self.set_title(f"Translate google {indetect}-{definition()}")
+        self.set_title(f"Translate {engin} {indetect}-{definition()}")
 
     def create_toolbar(self):
         toolbar = Gtk.Toolbar()
