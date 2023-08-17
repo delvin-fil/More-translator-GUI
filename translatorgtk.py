@@ -17,12 +17,12 @@ from langdetect import detect
 import translators as ts
 import translators.server as tss
 
-engin = 'bing'
-#engin = 'google'
-#engin = 'Deepl'
+engine = 'bing'
+#engine = 'google'
+#engine = 'Deepl'
 
 CURDIR = os.path.dirname(os.path.abspath(__file__))
-ICON = os.path.join(CURDIR, f'{engin}.png')
+ICON = os.path.join(CURDIR, f'{engine}.png')
 
 err = "Buffer empty!!!"
 proxy = {'address': '127.0.0.1', 'port': 9050}
@@ -48,14 +48,14 @@ def definition():
 def translate():
     output = []
     
-    if engin == 'Deepl' :
+    if engine == 'Deepl' :
         output = tss.deepl(clip(), from_language=indetect, to_language=definition(), if_use_cn_host=False, proxies=proxy)
-    elif engin == 'bing' :
+    elif engine == 'bing' :
         output = tss.bing(clip(), to_language=definition(), professional_field='general')
-        #output = tss.deepl(clip(), to_language=definition(), if_use_cn_host=False, proxies=proxy)
+
     else:
         output = tss.google(clip(), to_language=definition(), professional_field='general')
-    #output = ts.tencent(clip())
+
     return output
 
 class TextViewWindow(Gtk.Window):
@@ -72,7 +72,7 @@ class TextViewWindow(Gtk.Window):
         self.connect("key-press-event", self._key)
 
     def init_ui(self):
-        self.set_title(f"Translate {engin} {indetect}-{definition()}")
+        self.set_title(f"Translate {engine} {indetect}-{definition()}")
 
     def create_toolbar(self):
         toolbar = Gtk.Toolbar()
