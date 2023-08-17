@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.9
+#!/usr/bin/env python3.10
 # -*- coding: utf-8 -*-
 '''
 https://github.com/uliontse/translators

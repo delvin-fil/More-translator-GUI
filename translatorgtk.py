@@ -15,11 +15,14 @@ from gi.repository import Gdk
 from gi.repository import Pango
 from langdetect import detect
 import translators as ts
+import translators.server as tss
 
 engin = 'bing'
+#engin = 'google'
+#engin = 'Deepl'
 
-CURRDIR = os.path.dirname(os.path.abspath(__file__))
-ICON = os.path.join(CURRDIR, f'{engin}.png')
+CURDIR = os.path.dirname(os.path.abspath(__file__))
+ICON = os.path.join(CURDIR, f'{engin}.png')
 
 err = "Buffer empty!!!"
 proxy = {'address': '127.0.0.1', 'port': 9050}
@@ -30,9 +33,9 @@ def clip():
     if not clip.strip() or not clip:
         clip = err
     else:
-        clip = clip
+        clip = str(clip)
     return clip
-
+print(clip())
 indetect = detect(clip())
 
 def definition():
@@ -44,11 +47,14 @@ def definition():
 
 def translate():
     output = []
-    #output = ts.google(clip(), to_language=definition(), if_use_cn_host=False, proxies=proxy)
-    if engin == 'bing' :
-        output = ts.bing(clip(), to_language=definition(), professional_field='general')
+    
+    if engin == 'Deepl' :
+        output = tss.deepl(clip(), from_language=indetect, to_language=definition(), if_use_cn_host=False, proxies=proxy)
+    elif engin == 'bing' :
+        output = tss.bing(clip(), to_language=definition(), professional_field='general')
+        #output = tss.deepl(clip(), to_language=definition(), if_use_cn_host=False, proxies=proxy)
     else:
-        output = ts.google(clip(), to_language=definition(), professional_field='general')
+        output = tss.google(clip(), to_language=definition(), professional_field='general')
     #output = ts.tencent(clip())
     return output
 
