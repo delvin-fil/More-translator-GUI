@@ -103,7 +103,7 @@ class TextViewWindow(Gtk.Window):
 
     def on_button_clicked(self, widget, tag):
         Gtk.main_quit()
-
+#ты хуй
 win = TextViewWindow()
 win.connect("destroy", Gtk.main_quit)
 win.set_icon_from_file(ICON)
