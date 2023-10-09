@@ -8,12 +8,11 @@ warnings.filterwarnings("ignore")
 import os
 import re
 import sys
+from pydbus import SessionBus
 import gi
 gi.require_version('Gtk', '3.0')
 
-from gi.repository import Gtk, Gdk, Pango
-#from gi.repository import 
-#from gi.repository import 
+from gi.repository import Gtk, Gdk, Pango, Notify, GLib
 from langdetect import detect
 import translators as ts
 import translators.server as tss
