@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.10
+#!/usr/bin/env python3.12
 # -*- coding: utf-8 -*-
 '''
 https://github.com/uliontse/translators
@@ -7,18 +7,29 @@ import warnings
 warnings.filterwarnings("ignore")
 import os
 import re
+import sys
+from pydbus import SessionBus
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import Pango
+
+from gi.repository import Gtk, Gdk, Pango, Notify, GLib
 from langdetect import detect
 import translators as ts
+import translators.server as tss
 
-CURRDIR = os.path.dirname(os.path.abspath(__file__))
-ICON = os.path.join(CURRDIR, 'icon.png')
+
+pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+engine = 'bing'
+#engine = 'google'
+#engine = 'Deepl'
+
+CURDIR = os.path.dirname(os.path.abspath(__file__)) 
+print(CURDIR)
+ICON = os.path.join(CURDIR, f'{engine}.png')
+print(ICON)
 
 err = "Buffer empty!!!"
+proxy = {'address': '127.0.0.1', 'port': 9050}
 
 def clip():
     clipbrd = os.popen('xclip -o -selection primary').read()
@@ -27,9 +38,11 @@ def clip():
     else:
         clipbrd = err
     return clipbrd
-#print (clip())
-
-indetect = detect(clip())
+txt = clip()
+txt = re.sub(r'“|”|»|«', '\"', txt)
+#
+print(txt)
+indetect = detect(txt)
 
 def definition():
     if indetect == 'ru':
@@ -40,9 +53,17 @@ def definition():
 
 def translate():
     output = []
-    output = ts.google(clip(), to_language=definition(), if_use_cn_host=False)
+    
+    if engine == 'Deepl' :
+        output = tss.deepl(clip(), from_language=indetect, to_language=definition(), if_use_cn_host=False, proxies=proxy)
+    elif engine == 'bing' :
+        output = tss.bing(clip(), to_language=definition(), professional_field='general')
+
+    else:
+        output = tss.google(clip(), to_language=definition(), professional_field='general')
+
     return output
-#print (translate)
+
 class TextViewWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self)
@@ -57,7 +78,7 @@ class TextViewWindow(Gtk.Window):
         self.connect("key-press-event", self._key)
 
     def init_ui(self):
-        self.set_title(f"Translate google {indetect}-{definition()}")
+        self.set_title(f"Translate {engine} {indetect}-{definition()}, Python ver: {pver}")
 
     def create_toolbar(self):
         toolbar = Gtk.Toolbar()

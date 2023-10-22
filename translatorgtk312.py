@@ -20,11 +20,13 @@ import translators.server as tss
 
 pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
 engine = 'bing'
-engine = 'google'
+#engine = 'google'
 #engine = 'Deepl'
 
-CURDIR = os.path.dirname(os.path.abspath(__file__))
+CURDIR = os.path.dirname(os.path.abspath(__file__)) 
+print(CURDIR)
 ICON = os.path.join(CURDIR, f'{engine}.png')
+print(ICON)
 
 err = "Buffer empty!!!"
 proxy = {'address': '127.0.0.1', 'port': 9050}
