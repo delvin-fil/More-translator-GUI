@@ -2,7 +2,7 @@
 ## Python & GTK 3
 Автоматический переводчик без использования API основных онлайн-переводчиков.
 Список поддерживаемых интерфейсов: Google, Microsoft(Bing), Baidu, Alibaba, Tencent, NetEase(Youdao), Sogou, Kingsoft(Iciba), Iflytek, Niutrans, Lingvanex, Naver(Papago), Deepl, Reverso, Itranslate, Caiyun, TranslateCom, Mglip, Utibet, Argos, etc.
-
+ 
 Переводит со всех доступных в указанных интерфейсах языков на русский. С русского только на английский.
 
 ![screenshot](https://github.com/delvin-fil/Google-translator-GUI/blob/master/screenshot.png)

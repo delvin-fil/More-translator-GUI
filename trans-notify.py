@@ -3,6 +3,7 @@
 '''
 https://github.com/uliontse/translators
 '''
+
 import warnings
 warnings.filterwarnings("ignore")
 import os
@@ -21,7 +22,7 @@ import translators.server as tss
 pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
 engine = 'bing'
 #engine = 'google'
-#engine = 'Deepl'
+
 
 CURDIR = os.path.dirname(os.path.abspath(__file__))
 ICON = os.path.join(CURDIR, f'{engine}.png')
@@ -53,13 +54,11 @@ def definition():
 def translate():
     output = []
     
-    if engine == 'Deepl' :
-        output = tss.deepl(clip(), from_language=indetect, to_language=definition(), if_use_cn_host=False, proxies=proxy)
     elif engine == 'bing' :
         output = tss.bing(clip(), to_language=definition(), professional_field='general')
 
     else:
-        output = tss.google(clip(), to_language=definition(), professional_field='general')
+        output = tss.google(clip(), to_language=definition(), professional_field='general', proxies=proxy)
 
     return output
 
