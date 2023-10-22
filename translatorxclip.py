@@ -24,9 +24,9 @@ engine = 'bing'
 #engine = 'Deepl'
 
 CURDIR = os.path.dirname(os.path.abspath(__file__)) 
-print(CURDIR)
+
 ICON = os.path.join(CURDIR, f'{engine}.png')
-print(ICON)
+
 
 err = "Buffer empty!!!"
 proxy = {'address': '127.0.0.1', 'port': 9050}
