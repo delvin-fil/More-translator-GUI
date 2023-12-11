@@ -138,3 +138,8 @@ chmod +x translatorxclip.py
 ```python
 AttributeError: 'NoneType' object has no attribute 'strip'
 ```
+**1.** 12.12.23 Полное обновление репозитория. Рекомендуется так же обновить библиотеки пользователя:
+```sh
+pip install --upgrade requests langdetect translators
+```
+и системные зависимости.
