@@ -8,7 +8,8 @@ warnings.filterwarnings("ignore")
 import os
 import re
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gdk', '4.0')
+gi.require_version('Gtk', '4.0')
 
 from gi.repository import Gtk
 from gi.repository import Gdk
@@ -28,12 +29,14 @@ err = "Buffer empty!!!"
 proxy = {'address': '127.0.0.1', 'port': 9050}
 
 def clip():
-    clipboard = Gtk.Clipboard.get(Gdk.SELECTION_PRIMARY)
-    clip = clipboard.wait_for_text()
-    if not clip.strip() or not clip:
+    clipboard = Gdk.Display.get_default().get_clipboard()
+    future = clipboard.read_text_async()
+    future.on_result(print_clipboard_text, clipboard)
+    print(future.get())
+    if not clipboard:
         clip = err
     else:
-        clip = str(clip)
+        clip = future.get()
     return clip
 print(clip())
 indetect = detect(clip())
@@ -58,43 +61,35 @@ def translate():
 
 class TextViewWindow(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self)
+        Gtk.Window.__init__(self, title=f"Translate {engine} {indetect}-{definition()}")
         self.set_default_size(1000, 350)
         self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-        self.grid = Gtk.Grid()
-        self.add(self.grid)
+        self.box = Gtk.Box(Gtk.Orientation.VERTICAL, spacing=0) 
+        self.set_child(self.box) 
         self.create_textview()
         self.create_toolbar()
-        self.init_ui()
         self.key_Esc = Gdk.keyval_from_name("Escape")
-        self.connect("key-press-event", self._key)
 
-    def init_ui(self):
-        self.set_title(f"Translate {engine} {indetect}-{definition()}")
-
+        self.connect("key-pressed-event", self._key)
+  
     def create_toolbar(self):
-        toolbar = Gtk.Toolbar()
-        self.grid.attach(toolbar, 1, 1, 1, 1)
-        new_button = Gtk.ToolButton.new_from_stock(Gtk.STOCK_CLOSE)
-        new_button.set_is_important(True)
-        toolbar.insert(new_button, 0)
+        toolbar = Gtk.Box(Gtk.Orientation.HORIZONTAL, spacing=0) 
+        new_button = Gtk.Button.new_icon_from_name("window-close-symbolic")
         new_button.connect("clicked", self.on_button_clicked, self.tag_bold)
-        new_button.show()
-
+        toolbar.append(new_button)
+        self.box.append(toolbar)
+        
     def create_textview(self):
         scrolledwindow = Gtk.ScrolledWindow()
-        scrolledwindow.set_hexpand(True)
-        scrolledwindow.set_vexpand(True)
         self.grid.attach(scrolledwindow, 0, 0, 2, 1)
         self.textview = Gtk.TextView()
         self.textbuffer = self.textview.get_buffer()
         self.textbuffer.set_text(f"{translate()}")
-        scrolledwindow.add(self.textview)
+        scrolledwindow.set_child(self.textview)
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
-        self.tag_bold = self.textbuffer.create_tag("bold",
-                                                   weight=Pango.Weight.BOLD)
-        self.textview.modify_font(Pango.FontDescription('Menlo Regular 24'))
-
+        self.tag_bold = self.textbuffer.create_tag("bold", weight=Pango.Weight.BOLD)
+        self.textview.set_font(Pango.FontDescription('Menlo Regular 24'))
+ 
     def _key(self, widg, event):
         if event.keyval == self.key_Esc:
             Gtk.main_quit()
@@ -104,6 +99,5 @@ class TextViewWindow(Gtk.Window):
 
 win = TextViewWindow()
 win.connect("destroy", Gtk.main_quit)
-win.set_icon_from_file(ICON)
-win.show_all()
+win.show()
 Gtk.main()

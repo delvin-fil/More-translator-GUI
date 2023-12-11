@@ -1,26 +1,26 @@
 #!/usr/bin/env python3.12
 # -*- coding: utf-8 -*-
 '''
-https://github.com/uliontse/translators
+https://github.com/UlionTse/translators
 '''
 import warnings
 warnings.filterwarnings("ignore")
 import os
 import re
 import sys
-from pydbus import SessionBus
 import gi
 gi.require_version('Gtk', '3.0')
 
-from gi.repository import Gtk, Gdk, Pango, Notify, GLib
+from gi.repository import Gtk, Gdk, Pango
 from langdetect import detect
 import translators as ts
 import translators.server as tss
 
 
 pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-engine = 'bing'
-engine = 'google'
+#engine = 'bing'
+#engine = 'google'
+engine = 'yandex'
 
 
 CURDIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -55,12 +55,12 @@ def definition():
 def translate():
     output = []
 
-    elif engine == 'bing' :
+    if engine == 'bing' :
         output = tss.bing(clip(), to_language=definition(), professional_field='general')
-
+    elif engine == 'yandex' :
+        output = tss.yandex(clip(), to_language=definition())
     else:
         output = tss.google(clip(), to_language=definition(), professional_field='general', proxies=proxy)
-
     return output
 
 class TextViewWindow(Gtk.Window):
