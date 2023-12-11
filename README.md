@@ -33,14 +33,14 @@
 #### Ubuntu/Mint/Debian:
 ```shell
 sudo apt-get install python3.6 python3-pip python3-gi python3-gi-cairo gir1.2-gtk-3.0
-pip3.6 install --user requests langdetect translators 
+pip install --user requests langdetect translators 
 ```
 #### CentOS:
 ```shell
 sudo yum install -y https://centos8.iuscommunity.org/ius-release.rpm
 sudo yum update
 sudo yum install -y python36u python36u-libs python36u-devel python36u-pip
-pip3.6 install --user requests langdetect translators
+pip install --user requests langdetect translators
 ```
 #### RedHat:
 ```shell
@@ -52,13 +52,13 @@ tar xzf Python-3.6.9.tgz
 cd Python-3.6.9
 ./configure --enable-optimizations
 make altinstall
-pip3.6 install --user requests langdetect translators
+pip install --user requests langdetect translators
 ```
 #### Gentoo:
 ```shell
 sudo USE="cairo" PYTHON_TARGETS="python3_6" emerge dev-python/pygobject -av
 sudo emerge dev-python/requests langdetect translators -aqv
-pip3.6 install --user requests langdetect translators # для свежей версии модуля
+pip install --user requests langdetect translators # для свежей версии модуля
 ```
 #### FreeBSD/DragonFly 
 информация от [Tupoll](https://github.com/tupoll)
