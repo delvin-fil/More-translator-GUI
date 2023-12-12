@@ -17,9 +17,9 @@ from langdetect import detect
 import translators as ts
 import translators.server as tss
 
-engine = 'bing'
-#engine = 'google'
-#engine = 'Deepl'
+#engine = 'bing'
+engine = 'google'
+#engine = 'yandex'
 
 CURDIR = os.path.dirname(os.path.abspath(__file__))
 ICON = os.path.join(CURDIR, f'{engine}.png')
@@ -50,9 +50,11 @@ def translate():
     
     if engine == 'bing' :
         output = tss.bing(clip(), to_language=definition(), professional_field='general')
-
+    elif engine == 'yandex' :
+        output = tss.yandex(clip(), to_language=definition())
     else:
-        output = tss.google(clip(), to_language=definition(), professional_field='general')
+        output = tss.google(clip(), to_language=definition(), professional_field='general', proxies=proxy)
+    return output
 
     return output
 

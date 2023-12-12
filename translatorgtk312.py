@@ -19,8 +19,8 @@ import translators.server as tss
 
 pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
 #engine = 'bing'
-#engine = 'google'
-engine = 'yandex'
+engine = 'google'
+#engine = 'yandex'
 
 
 CURDIR = os.path.dirname(os.path.abspath(__file__)) 

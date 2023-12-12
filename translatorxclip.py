@@ -19,8 +19,9 @@ import translators.server as tss
 
 
 pver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-engine = 'bing'
-#engine = 'google'
+#engine = 'bing'
+engine = 'google'
+#engine = 'yandex'
 
 
 CURDIR = os.path.dirname(os.path.abspath(__file__)) 
@@ -54,11 +55,13 @@ def definition():
 def translate():
     output = []
     
-    elif engine == 'bing' :
+    if engine == 'bing' :
         output = tss.bing(clip(), to_language=definition(), professional_field='general')
-
+    elif engine == 'yandex' :
+        output = tss.yandex(clip(), to_language=definition())
     else:
         output = tss.google(clip(), to_language=definition(), professional_field='general')
+    return output
 
     return output
 
